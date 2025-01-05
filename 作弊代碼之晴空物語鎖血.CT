@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"接收封包"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+
+originalcode:
+cmp eax,00D68C0C
+je exit
+cmp eax,00D38201
+je exit
+cmp eax,00D31301
+je exit
+cmp eax,00D66950
+je exit
+cmp eax,00D673DC
+je exit
+cmp eax,00D684E0
+je exit
+cmp eax,00D68768
+je exit
+cmp eax,00D68768
+je exit
+cmp eax,00D68768
+je exit
+cmp eax,00D68768
+je exit
+mov eax,[esi]
+mov ecx,esi
+call dword ptr [eax+08]
+
+exit:
+jmp returnhere
+
+"GrandFantasia.exe"+6B756A:
+jmp newmem
+nop 2
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"GrandFantasia.exe"+6B756A:
+db 8B 06 8B CE FF 50 08
+//mov eax,[esi]
+//mov ecx,esi
+//call dword ptr [eax+08]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"改坐騎"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+
+originalcode:
+mov edx,5B8E2
+push eax
+push ecx
+push edx
+mov ecx,edi
+
+exit:
+jmp returnhere
+
+"GrandFantasia.exe"+29B23D:
+jmp newmem
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"GrandFantasia.exe"+29B23D:
+db 50 51 52 8B CF
+//push eax
+//push ecx
+//push edx
+//mov ecx,edi
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"找坐騎  自己到那邊查詢訪問"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>006590C3</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>266</ID>
+      <Description>"拍賣"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(call1,25600)
+createthread(call1)
+label(oldvalue)
+registersymbol(oldvalue)
+call1:
+call 00622A50
+
+
+
+
+
+
+ret
+
+
+oldvalue:
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>322</ID>
+      <Description>"鎖血"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+globalalloc(mycode,4096)
+label(exit)
+label(myflag)
+registersymbol(myflag)
+label(oldvalue)
+registersymbol(oldvalue)
+createthread(mycode)
+mycode:
+push FFFF
+push FFFF
+push FFFF
+push FFFF
+
+call 622F50
+add esp,10
+ret
+
+cmp [myflag],0
+je exit
+ret
+
+
+exit:
+
+push #100
+call sleep
+cmp [myflag],0
+je mycode
+
+ret
+
+
+myflag:
+dd 0
+oldvalue:
+dd 0
+[DISABLE]
+myflag:
+dd 1
+oldvalue:
+dd 0
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
